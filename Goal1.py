@@ -1,11 +1,15 @@
 import arcade
+
+screen_width = 1000
+screen_height = 700
+screen_title = "Maze Game"
 class MyGame(arcade.Window):
     
     def __init__(self):
         
-        super().__init__(1000, 700, "Maze Game")
+        super().__init__(screen_width, screen_height, screen_title)
 
-        arcade.set_background_color(arcade.csscolor.LIGHT_SKY_BLUE)
+        arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
     
     def setup(self):
         pass
@@ -15,4 +19,5 @@ def main():
     window.setup()
     arcade.run()
 
-main()
+if __name__ == "__main__":
+    main()
