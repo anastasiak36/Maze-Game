@@ -12,6 +12,7 @@ class MyGame(arcade.Window):
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
     
     def setup(self):
+        # make grid for maze
         pass
 
 def main():
