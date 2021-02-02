@@ -20,7 +20,12 @@ class MyGame(arcade.Window):
         # create player sprite and store it in the variables
         self.player_sprite = arcade.Sprite("blue.PNG")
         # make grid for maze
-        pass
+        
+    def draw(self):
+        arcade.start_render()
+
+        #draw the sprites 
+        self.player_list.draw()
 
 def main():
     window = MyGame()
