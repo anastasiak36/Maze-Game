@@ -11,12 +11,14 @@ class MyGame(arcade.Window):
 
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
         # create the list to keep the character in
-        self.player_list = None
+        self.player_list = arcade.SpriteList()
 
         # create separate variable that will hold the sprite
-        self.player_sprite
+        self.player_sprite = None
     
     def setup(self):
+        # create player sprite and store it in the variables
+        self.player_sprite = arcade.Sprite("blue.PNG")
         # make grid for maze
         pass
 
