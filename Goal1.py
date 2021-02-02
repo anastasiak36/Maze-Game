@@ -10,6 +10,11 @@ class MyGame(arcade.Window):
         super().__init__(screen_width, screen_height, screen_title)
 
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
+        # create the list to keep the character in
+        self.player_list = None
+
+        # create separate variable that will hold the sprite
+        self.player_sprite
     
     def setup(self):
         # make grid for maze
