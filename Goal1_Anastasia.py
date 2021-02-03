@@ -5,6 +5,7 @@ screen_width = 1000
 screen_height = 700
 screen_title = "Maze Game"
 character_scale = 0.25
+player_speed = 3
 class MyGame(arcade.Window):
     
     def __init__(self):
@@ -32,10 +33,28 @@ class MyGame(arcade.Window):
         #draw the sprites 
         self.player_list.draw()
 
+    def on_key_press(self, key, modifiers):
+        if key == arcade.key.UP:
+            self.player_sprite.change_y = player_speed
+        elif key == arcade.key.DOWN:
+            self.player_sprite.change_y = -player_speed
+        elif key == arcade.key.RIGHT:
+            self.player_sprite.change_x = player_speed
+        elif key == arcade.key.LEFT:
+            self.player_sprite.change_x = -player_speed
+    
+    def on_key_release(self, key, modifiers):
+        if key == arcade.key.UP:
+            self.player_sprite.change_y = 0
+        elif key == arcade.key.DOWN:
+            self.player_sprite.change_y = 0
+        elif key == arcade.key.RIGHT:
+            self.player_sprite.change_x = 0
+        elif key == arcade.key.LEFT:
+            self.player_sprite.change_x = 0
 def main():
     window = MyGame()
     window.setup()
-    window.on_draw()
     arcade.run()
 
 if __name__ == "__main__":
