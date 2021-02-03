@@ -31,6 +31,7 @@ class MyGame(arcade.Window):
 
         #draw the sprites 
         self.player_list.draw()
+    
 
 def main():
     window = MyGame()
