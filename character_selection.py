@@ -35,7 +35,7 @@ class Character_Selection(tk.Frame):
             tk.Radiobutton(self, text= i.name, font = 'ComicSansMS 14', fg = 'Purple', variable = self.image_file, value = i.file
             ).grid(row = row, column = column, sticky = tk.W)
 
-            imageSmall = tk.PhotoImage(i.file)
+            imageSmall = tk.PhotoImage(file = i.file)
             w= tk.Label (self,
                         image = imageSmall, 
                          )
@@ -45,13 +45,13 @@ class Character_Selection(tk.Frame):
 
             column += 1
             if column == 4:
-                row += 1
-                image_row += 1
+                row += 2
+                image_row += 2
                 column = 0
         
         # create the button
         tk.Button(self, text = "Start Game!", font = "ComicSansMS 13", command = self.selected_clicked
-        ).grid(row = 5, column = 3, sticky = tk.E)
+        ).grid(row = 6, column = 3, sticky = tk.E)
         
 
     def selected_clicked(self):
