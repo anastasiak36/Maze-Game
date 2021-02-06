@@ -4,11 +4,11 @@ import arcade
 screen_width = 1000
 screen_height = 700
 screen_title = "Maze Game"
-character_scale = 0.25
+character_scale = 0.5
 player_speed = 3
 class MyGame(arcade.Window):
     
-    def __init__(self):
+    def __init__(self, sprite):
         
         super().__init__(screen_width, screen_height, screen_title)
 
@@ -18,10 +18,11 @@ class MyGame(arcade.Window):
 
         # create separate variable that will hold the sprite
         self.player_sprite = None
+        self.player_sprite_image = sprite
     
     def setup(self):
         # create player sprite and store it in the variables
-        self.player_sprite = arcade.Sprite("Maze-Game/images/blue.png", character_scale)
+        self.player_sprite = arcade.Sprite(self.player_sprite_image, character_scale)
         self.player_sprite.center_x = 50
         self.player_sprite.center_y = 50
         self.player_list.append(self.player_sprite)
@@ -53,10 +54,3 @@ class MyGame(arcade.Window):
             self.player_sprite.change_x = 0
         elif key == arcade.key.LEFT:
             self.player_sprite.change_x = 0
-def main():
-    window = MyGame()
-    window.setup()
-    arcade.run()
-
-if __name__ == "__main__":
-    main()
