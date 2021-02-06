@@ -4,7 +4,7 @@ import arcade
 screen_width = 1000
 screen_height = 700
 screen_title = "Maze Game"
-character_scale = 0.25
+character_scale = 0.5
 player_speed = 3
 class MyGame(arcade.Window):
     
