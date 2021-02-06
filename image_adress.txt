@@ -1,11 +1,11 @@
-Blue, "Maze-Game/images/blue.PNG"
-Bubble Gum, "Maze-Game/images/bubble_gum.PNG"
-Bunny, "Maze-Game/images/bunny.PNG"
-Dino, "Maze-Game/images/dino.PNG"
-Ground Hog, "Maze-Game/images/ground_hog.PNG"
-Jiggly Puff, "Maze-Game/images/jiggly_puff.PNG"
-Kirby, "Maze-Game/images/kirby.PNG"
-Pinky, "Maze-Game/images/pinky.PNG"
-Squirrel, "Maze-Game/images/squirrel.PNG"
-Twig, "Maze-Game/images/twig.PNG"
-Twinkle, "Maze-Game/images/twinkle.PNG"
+Blue, Maze-Game/images/blue.PNG
+Bubble Gum, Maze-Game/images/bubble_gum.PNG
+Bunny, Maze-Game/images/bunny.PNG
+Dino, Maze-Game/images/dino.PNG
+Ground Hog, Maze-Game/images/ground_hog.PNG
+Jiggly Puff, Maze-Game/images/jiggly_puff.PNG
+Kirby, Maze-Game/images/kirby.PNG
+Pinky, Maze-Game/images/pinky.PNG
+Squirrel, Maze-Game/images/squirrel.PNG
+Twig, Maze-Game/images/twig.PNG
+Twinkle, Maze-Game/images/twinkle.PNG
