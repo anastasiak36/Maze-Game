@@ -49,6 +49,11 @@ class Character_Selection(tk.Frame):
                 row += 1
                 image_row += 1
                 column = 0
-
+        
+        # create the button
+        tk.Button(self, text = "Start Game!", font = "ComicSansMS 13", command = self.selected_clicked
+        ).grid(row = 5, column = 3, sticky = tk.E)
         
 
+    def selected_clicked(self):
+        self.callback_on_selected(self.image_file)
