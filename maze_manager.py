@@ -19,7 +19,7 @@ class Maze_Manager(object):
                                                 callback_on_selected = self.onclose_character_selection)
     
     def onclose_character_selection(self, selected_char_image):
-        self.current_screen.destroy()
+        self.root.destroy()
         self.setup_maze(selected_char_image)
     
     def setup_maze(self, selected_char_image):
