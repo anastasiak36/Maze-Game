@@ -135,5 +135,52 @@ class MyGame(arcade.Window):
             self.view_bottom = 0
             print(f"Total number of wall blocks: {len(self.wall_list)}")
 
+    def on_draw(self):
+        arcade.start_render()
+
+        self.wall_list.draw()
+        self.player_list.draw()
+
+        sprite.count = len(self.wall_list)
+
+        output = f"Sprite Count: {sprite_count}"
+        arcade.draw_text(output, self.view_left + 20, screen_height - 20 + self.view_bottom, arcade.color.DARK_BLUE, 16)
         
+
+    def on_update(self):
+
+        self.physics_engine.update()
+
+        changed = False
+
+        left_bndry = self.view_left + viewport_margin
+        if self.player_sprite.left < left_bndry:
+            self.view_left -= left_bndry - self.player_sprite.left
+            changed = True
+
+        right_bndry = self.view_left + screen_width - viewport_margin
+        if self.player_sprite.right > right_bndry:
+            self.view_left += self.player_sprite.right - right_bndry
+            changed = True
+
+        top_bndry = self.view_bottom + screen_width - viewport_margin
+        if self.player_sprite.top > top_bndry:
+            self.view_bottom += self.player_sprite.top - top_bndry
+            changed = True
+
+        bottom_bndry = self.view_bottom + viewport_margin
+        if self.player_sprite.bottom < bottom_bndry:
+            self.view_bottom -= bottom_bndry - self.player_sprite.bottom
+            changed = True
+
+        if changed:
+            aracde.set_viewport(self.view_left, screen_width + self.view_left, self.view_bottom, screen_height + self.view_bottom)
+
+    def main():
+        window = MyGame(screen_width, screen_height, screen_title)
+        window.setup()
+        arcade.run()
+
+    if __name__ == "__main__":
+        main()
     
