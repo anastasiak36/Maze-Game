@@ -117,4 +117,23 @@ class MyGame(arcade.Window):
         self.player_sprite = arcade.Sprite(":resources:images/animatedcharacters/bluegumdrop/blue.png", sprite_scale)
         self.player_list.append(self.player_sprite)
 
+        placed = False
+        while not placed:
+
+            self.player_sprite.center_x = random.randrange(maze_width * sprite_size)
+            self.player_sprite.center_y = random.randrange(maze_height * sprite_size)
+
+            walls_hit = arcade.check_for_collision_with_list(self.player_sprite, self.wall_list)
+            if len(walls_hit) == 0:
+                placed True
+
+            self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
+
+            arcade.set_background_color(arcade.color.AZURE_MIST)
+
+            self.view_left = 0
+            self.view_bottom = 0
+            print(f"Total number of wall blocks: {len(self.wall_list)}")
+
         
+    
