@@ -60,3 +60,61 @@ def make_maze_depth_first(maze_width, maze_height):
         
     walk(random.randrange(w), random.randrange(h))
     return maze
+class MyGame(arcade.Window):
+
+    def __init__(self, width, height, title):
+        super().__init__(width, height, title)
+        file_path = os.path.dirname(os.path.abspath(__file__))
+        os.chdir(file_path)
+
+        self.player_list = None
+        self.wall_list = None
+
+        self.score = 0
+        self.player_sprite = None
+
+        self.physics_engine = None
+
+        self.view_bottom = 0
+        self.view_left = 0
+
+    def setup(self):
+
+        self.player_list = arcade.SpriteList()
+        self.wall_list = arcade.SpriteList()
+
+        self.score = 0
+
+        maze = make_maze_depth_first(maze_width, maze_height)
+
+        if not merge_sprites:
+            for row in range(maze_height):
+                for column in range(maze_width):
+                    if maze[row][column] == 1:
+                        wall = arcade.Sprite ##TODO for later
+                        wall.center_x = column * sprite_size + sprite_size / 2
+                        wall.center_y = row * sprite_size + sprite_size / 2
+                        self.wall_list.append(wall)
+        
+        else:
+            for row in range(maze_height):
+                column = 0
+                while column < len(maze):
+                    while column < len(maze) and maze[row][column] == 0:
+                        column += 1
+                    start_column = column
+                    while column < len(maze) and maze[row][column] == 1:
+                        column += 1
+                    end column = column - 1
+                    column_count = end_column - start_column + 1
+                    column_mid = (start_column + end_column) / 2
+                    wall = arcade.Sprite##TODO for later
+                    wall.center_x = column_mid * sprite_size + sprite_size / 2
+                    wall.center_y = row * sprite_size + sprite_size / 2
+                    wall.width = sprite_size  * column_count
+                    self.wall_list.append(wall)
+
+        self.player_sprite = arcade.Sprite(":resources:images/animatedcharacters/bluegumdrop/blue.png", sprite_scale)
+        self.player_list.append(self.player_sprite)
+
+        
