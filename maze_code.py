@@ -11,17 +11,17 @@ screen_width = 1000
 screen_height = 700
 screen_title = "Maze Game"
 
-player_speed = 5
+player_speed = 3
 
 empty_tile = 0
 crate_tile = 1
 
-maze_height = 51
-maze_width = 51
+maze_height = 30
+maze_width = 30
 
 viewport_margin = 300
 
-merge_sprites = True
+merge_sprites = False
 
 def _creating_the_grid(width, height):
     grid = []
@@ -143,10 +143,10 @@ class MyGame(arcade.Window):
         self.wall_list.draw()
         self.player_list.draw()
 
-        sprite_count = len(self.wall_list)
+        #sprite_count = len(self.wall_list)
 
-        output = f"Sprite Count: {sprite_count}"
-        arcade.draw_text(output, self.view_left + 20, screen_height - 20 + self.view_bottom, arcade.color.DARK_BLUE, 16)
+        #output = f"Sprite Count: {sprite_count}"
+        #arcade.draw_text(output, self.view_left + 20, screen_height - 20 + self.view_bottom, arcade.color.DARK_BLUE, 16)
         
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:
