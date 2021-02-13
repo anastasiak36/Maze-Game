@@ -12,7 +12,7 @@ class MyGame(arcade.Window):
         
         super().__init__(screen_width, screen_height, screen_title)
 
-        arcade.set_background_color(arcade.color.AZURE_MIST)
+        arcade.set_background_color(arcade.color.MAUVE)
         # create the list to keep the character in
         self.player_list = arcade.SpriteList()
 
@@ -54,3 +54,10 @@ class MyGame(arcade.Window):
             self.player_sprite.change_x = 0
         elif key == arcade.key.LEFT:
             self.player_sprite.change_x = 0
+
+def main():
+    window = MyGame("Maze-Game/images/dino.PNG")
+    window.setup()
+    arcade.run()
+
+main()

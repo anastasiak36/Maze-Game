@@ -65,8 +65,6 @@ class MyGame(arcade.Window):
     def __init__(self, sprite):
         
         super().__init__(screen_width, screen_height, screen_title)
-
-        arcade.set_background_color(arcade.color.RAZZLE_DAZZLE_ROSE)
         # create the list to keep the character in
         self.player_sprite_image = sprite
 
@@ -134,8 +132,7 @@ class MyGame(arcade.Window):
 
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
-            arcade.set_background_color(arcade.color.AZURE_MIST)
-
+            arcade.set_background_color(arcade.csscolor.MINT_CREAM)
             self.view_left = 0
             self.view_bottom = 0
             print(f"Total number of wall blocks: {len(self.wall_list)}")
