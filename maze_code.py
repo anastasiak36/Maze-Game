@@ -62,8 +62,13 @@ def make_maze_depth_first(maze_width, maze_height):
     return maze
 class MyGame(arcade.Window):
 
-    def __init__(self, width, height, title):
-        super().__init__(width, height, title)
+    def __init__(self, sprite):
+        
+        super().__init__(screen_width, screen_height, screen_title)
+
+        arcade.set_background_color(arcade.color.RAZZLE_DAZZLE_ROSE)
+        # create the list to keep the character in
+        self.player_sprite_image = sprite
 
         self.player_list = None
         self.wall_list = None
@@ -194,11 +199,5 @@ class MyGame(arcade.Window):
         if changed:
             arcade.set_viewport(self.view_left, screen_width + self.view_left, self.view_bottom, screen_height + self.view_bottom)
 
-def main():
-    window = MyGame(screen_width, screen_height, screen_title)
-    window.setup()
-    arcade.run()
 
-if __name__ == "__main__":
-    main()
     
