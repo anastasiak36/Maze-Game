@@ -16,8 +16,8 @@ player_speed = 5
 empty_tile = 0
 crate_tile = 1
 
-maze_height = 20
-maze_width = 20
+maze_height = 51
+maze_width = 51
 
 viewport_margin = 300
 
