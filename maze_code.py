@@ -117,7 +117,7 @@ class MyGame(arcade.Window):
                     wall.width = sprite_size  * column_count
                     self.wall_list.append(wall)
 
-        self.player_sprite = arcade.Sprite("Maze-Game/images/dino.PNG", sprite_scale)
+        self.player_sprite = arcade.Sprite(self.player_sprite_image, sprite_scale)
         self.player_list.append(self.player_sprite)
 
         placed = False

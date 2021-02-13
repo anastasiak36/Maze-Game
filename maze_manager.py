@@ -1,7 +1,7 @@
 import tkinter as tk
 import arcade
 from character_selection import Character_Selection, ImageList, Image_object
-from Goal1_for_Ria import MyGame
+from maze_code import MyGame
 
 class Maze_Manager(object):
     def __init__(self):
