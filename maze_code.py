@@ -21,7 +21,6 @@ maze_width = 30
 
 viewport_margin = 300
 
-merge_sprites = False
 
 def _creating_the_grid(width, height):
     grid = []
@@ -88,31 +87,12 @@ class MyGame(arcade.Window):
 
         maze = make_maze_depth_first(maze_width, maze_height)
 
-        if not merge_sprites:
-            for row in range(maze_height):
-                for column in range(maze_width):
-                    if maze[row][column] == 1:
-                        wall = arcade.Sprite("Maze-Game/images/brick_wall.PNG", sprite_scale) 
-                        wall.center_x = column * sprite_size + sprite_size / 2
-                        wall.center_y = row * sprite_size + sprite_size / 2
-                        self.wall_list.append(wall)
-        
-        else:
-            for row in range(maze_height):
-                column = 0
-                while column < len(maze):
-                    while column < len(maze) and maze[row][column] == 0:
-                        column += 1
-                    start_column = column
-                    while column < len(maze) and maze[row][column] == 1:
-                        column += 1
-                    end_column = column - 1
-                    column_count = end_column - start_column + 1
-                    column_mid = (start_column + end_column) / 2
-                    wall = arcade.Sprite("Maze-Game/images/brick_wall.PNG", sprite_scale, repeat_count_x= column_count)
-                    wall.center_x = column_mid * sprite_size + sprite_size / 2
+        for row in range(maze_height):
+            for column in range(maze_width):
+                if maze[row][column] == 1:
+                    wall = arcade.Sprite("Maze-Game/images/brick_wall.PNG", sprite_scale) 
+                    wall.center_x = column * sprite_size + sprite_size / 2
                     wall.center_y = row * sprite_size + sprite_size / 2
-                    wall.width = sprite_size  * column_count
                     self.wall_list.append(wall)
 
         self.player_sprite = arcade.Sprite(self.player_sprite_image, sprite_scale)
