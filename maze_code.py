@@ -16,8 +16,8 @@ player_speed = 3
 empty_tile = 0
 crate_tile = 1
 
-maze_height = 30
-maze_width = 30
+maze_height = 31
+maze_width = 31
 
 viewport_margin = 300
 
@@ -103,8 +103,8 @@ class MyGame(arcade.Window):
 
             w = maze_width * sprite_size
             h = maze_height * sprite_size
-            self.player_sprite.center_x = random.randrange(w)
-            self.player_sprite.center_y = random.randrange(h)
+            self.player_sprite.center_x = w
+            self.player_sprite.center_y = h
 
             walls_hit = arcade.check_for_collision_with_list(self.player_sprite, self.wall_list)
             if len(walls_hit) == 0:
