@@ -105,8 +105,8 @@ class MyGame(arcade.Window):
                     self.wall_list.append(wall)
 
         chest = arcade.Sprite("Maze-Game/images/open_treasure_chest.PNG", sprite_scale)
-        chest.center_x = 980
-        chest.center_y = 100
+        chest.center_x = 30 * sprite_size + sprite_size / 2
+        chest.center_y = r * sprite_size + sprite_size / 2
         self.treasure_list.append(chest)
 
         self.player_sprite = arcade.Sprite(self.player_sprite_image, sprite_scale)
@@ -136,6 +136,7 @@ class MyGame(arcade.Window):
 
         self.wall_list.draw()
         self.player_list.draw()
+        self.treasure_list.draw()
 
         #sprite_count = len(self.wall_list)
 
