@@ -15,10 +15,14 @@ player_speed = 3
 
 empty_tile = 0
 crate_tile = 1
-chest_tile = 2
+chest_tile = 2 
 
 maze_height = 31
 maze_width = 31
+
+r = random.randrange(maze_height-1)
+while r % 2 == 1 or r == maze_height - 1 or r == 0:
+    r = random.randrange(maze_height-1)
 
 viewport_margin = 300
 
@@ -34,8 +38,8 @@ def _creating_the_grid(width, height):
                 grid[row].append(crate_tile)
             else:
                 grid[row].append(crate_tile)
-    r = random.randrange(height-1)
-    grid[r][width-1] = chest_tile
+    
+    grid[r][width-1] = empty_tile
     return grid
 
 def make_maze_depth_first(maze_width, maze_height):
@@ -99,11 +103,11 @@ class MyGame(arcade.Window):
                     wall.center_x = column * sprite_size + sprite_size / 2
                     wall.center_y = row * sprite_size + sprite_size / 2
                     self.wall_list.append(wall)
-                elif maze[row][column] == 2:
-                    chest = arcade.Sprite("Maze-Game/images/open_treasure_chest.PNG", sprite_scale)
-                    chest.center_x = column * sprite_size + sprite_size / 2
-                    chest.center_y = row * sprite_size + sprite_size / 2
-                    self.treasure_list.append(chest)
+
+        chest = arcade.Sprite("Maze-Game/images/open_treasure_chest.PNG", sprite_scale)
+        chest.center_x = 980
+        chest.center_y = 100
+        self.treasure_list.append(chest)
 
         self.player_sprite = arcade.Sprite(self.player_sprite_image, sprite_scale)
         self.player_list.append(self.player_sprite)
