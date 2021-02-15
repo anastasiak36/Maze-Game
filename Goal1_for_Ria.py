@@ -5,7 +5,7 @@ import arcade
 import timeit
 import os
 
-local_sprite = 130
+local_sprite = 128
 sprite_scale = 0.25
 sprite_size = local_sprite * sprite_scale
 
@@ -18,29 +18,31 @@ player_speed = 5
 empty_tile = 0
 crate_tile = 1
 
-maze_height = 901
-maze_width = 501
+maze_height = 20
+maze_width = 20
 
 viewport_margin = 300
 
-def creating_the_grid(width, height):
+merge_sprites = True
+
+def _creating_the_grid(width, height):
     grid = []
     for row in range(height):
         grid.append([])
         for column in range(width):
-            if column % 2 == 0 and row % 2 == 0:
+            if column % 2 == 1 and row % 2 == 1:
                 grid[row].append(empty_tile)
             elif column == 0 or row == 0 or column == width - 1 or row == height - 1:
                 grid[row].append(crate_tile)
             else:
                 grid[row].append(crate_tile)
-        return grid
+    return grid
 
 def make_maze_depth_first(maze_width, maze_height):
-    maze = creating_the_grid(maze_width, maze_height)
+    maze = _creating_the_grid(maze_width, maze_height)
     width_for_maze = (len(maze[0]) - 1) // 2
     height_for_maze = (len(maze) - 1) // 2
-    vis = [[0] * w + [1] for _ in range(height_for_maze)] + [[1] * (w+1)]
+    vis = [[0] * width_for_maze + [1] for _ in range(height_for_maze)] + [[1] * (width_for_maze + 1)]
 
     def walk (x: int, y: int):
         vis[y][x] = 1
@@ -48,24 +50,22 @@ def make_maze_depth_first(maze_width, maze_height):
         depth_for_maze = [(x-1, y), (x, y+1), (x+1, y), (x, y-1)]
         random.shuffle(depth_for_maze)
         for (xx, yy) in depth_for_maze:
-            if vis[xx][yy]:
+            if vis[yy][xx]:
                 continue
-            if xx = x:
+            if xx == x:
                 maze[max(y, yy) * 2][x*2+1] = empty_tile
-            if yy = y:
+            if yy == y:
                 maze[y*2+1][max(x,xx)*2] = empty_tile
             
             walk(xx, yy)
 
         
-    walk(random.randrange(w), random.randrange(h))
+    walk(random.randrange(width_for_maze), random.randrange(height_for_maze))
     return maze
 class MyGame(arcade.Window):
 
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
-        file_path = os.path.dirname(os.path.abspath(__file__))
-        os.chdir(file_path)
 
         self.player_list = None
         self.wall_list = None
@@ -91,7 +91,7 @@ class MyGame(arcade.Window):
             for row in range(maze_height):
                 for column in range(maze_width):
                     if maze[row][column] == 1:
-                        wall = arcade.Sprite ##TODO for later
+                        wall = arcade.Sprite("Maze-Game/images/brickwall.png", sprite_scale)
                         wall.center_x = column * sprite_size + sprite_size / 2
                         wall.center_y = row * sprite_size + sprite_size / 2
                         self.wall_list.append(wall)
@@ -105,16 +105,16 @@ class MyGame(arcade.Window):
                     start_column = column
                     while column < len(maze) and maze[row][column] == 1:
                         column += 1
-                    end column = column - 1
+                    end_column = column - 1
                     column_count = end_column - start_column + 1
                     column_mid = (start_column + end_column) / 2
-                    wall = arcade.Sprite##TODO for later
+                    wall = arcade.Sprite("Maze-Game/images/brickwall.png", sprite_scale, repeat_count_x=column_count)
                     wall.center_x = column_mid * sprite_size + sprite_size / 2
                     wall.center_y = row * sprite_size + sprite_size / 2
-                    wall.width = sprite_size  * column_count
+                    wall.width = sprite_size * column_count
                     self.wall_list.append(wall)
 
-        self.player_sprite = arcade.Sprite(":resources:images/animatedcharacters/bluegumdrop/blue.png", sprite_scale)
+        self.player_sprite = arcade.Sprite("Maze-Game/images/dino.PNG", sprite_scale)
         self.player_list.append(self.player_sprite)
 
         placed = False
@@ -125,7 +125,7 @@ class MyGame(arcade.Window):
 
             walls_hit = arcade.check_for_collision_with_list(self.player_sprite, self.wall_list)
             if len(walls_hit) == 0:
-                placed True
+                placed = True
 
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
@@ -141,13 +141,32 @@ class MyGame(arcade.Window):
         self.wall_list.draw()
         self.player_list.draw()
 
-        sprite.count = len(self.wall_list)
+        sprite_count = len(self.wall_list)
 
         output = f"Sprite Count: {sprite_count}"
         arcade.draw_text(output, self.view_left + 20, screen_height - 20 + self.view_bottom, arcade.color.DARK_BLUE, 16)
         
+    def on_key_press(self, key, modifiers):
+        if key == arcade.key.UP:
+            self.player_sprite.change_y = player_speed
+        elif key == arcade.key.DOWN:
+            self.player_sprite.change_y = -player_speed
+        elif key == arcade.key.RIGHT:
+            self.player_sprite.change_x = player_speed
+        elif key == arcade.key.LEFT:
+            self.player_sprite.change_x = -player_speed
+    
+    def on_key_release(self, key, modifiers):
+        if key == arcade.key.UP:
+            self.player_sprite.change_y = 0
+        elif key == arcade.key.DOWN:
+            self.player_sprite.change_y = 0
+        elif key == arcade.key.RIGHT:
+            self.player_sprite.change_x = 0
+        elif key == arcade.key.LEFT:
+            self.player_sprite.change_x = 0
 
-    def on_update(self):
+    def on_update(self, delta_time):
 
         self.physics_engine.update()
 
@@ -174,13 +193,13 @@ class MyGame(arcade.Window):
             changed = True
 
         if changed:
-            aracde.set_viewport(self.view_left, screen_width + self.view_left, self.view_bottom, screen_height + self.view_bottom)
+            arcade.set_viewport(self.view_left, screen_width + self.view_left, self.view_bottom, screen_height + self.view_bottom)
 
-    def main():
-        window = MyGame(screen_width, screen_height, screen_title)
-        window.setup()
-        arcade.run()
+def main():
+    window = MyGame(screen_width, screen_height, screen_title)
+    window.setup()
+    arcade.run()
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
     
