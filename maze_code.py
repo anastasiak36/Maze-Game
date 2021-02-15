@@ -25,6 +25,7 @@ r = 15
 viewport_margin = 300
 
 
+
 def _creating_the_grid(width, height):
     grid = []
     for row in range(height):
@@ -76,6 +77,7 @@ class MyGame(arcade.Window):
         self.wall_list = None
         self.treasure_list = None
         self.coin_list = None
+        self.exit_list = None
 
         self.score = 0
         self.player_sprite = None
@@ -83,6 +85,7 @@ class MyGame(arcade.Window):
         self.physics_engine = None
 
         self.coin_count = 0
+        self.hit = False
 
         self.view_bottom = 0
         self.view_left = 0
@@ -93,6 +96,7 @@ class MyGame(arcade.Window):
         self.wall_list = arcade.SpriteList()
         self.treasure_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
+        self.exit_list = arcade.SpriteList()
 
         self.score = 0
 
@@ -126,6 +130,7 @@ class MyGame(arcade.Window):
         self.player_sprite = arcade.Sprite(self.player_sprite_image, sprite_scale)
         self.player_list.append(self.player_sprite)
 
+
         placed = False
         while not placed:
 
@@ -152,9 +157,19 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.treasure_list.draw()
         self.coin_list.draw()
+        
 
         output = f"Coins Collected: {self.coin_count}"
         arcade.draw_text(output, self.view_left + 840, screen_height - 20 + self.view_bottom, arcade.color.DARK_BLUE, 16)
+
+        if self.hit == True:
+            output_exit = f"Congratulations! You made it! \n Please proceed to the exit!"
+            arcade.draw_text(output_exit, self.view_left + 600, screen_height - 200 + self.view_bottom, arcade.color.DARK_BLUE, 24)
+            exit_sprite = arcade.Sprite("Maze-Game/images/Exit_sign.jpg", sprite_scale)
+            exit_sprite.center_x = 1500
+            exit_sprite.center_y = 300
+            self.exit_list.append(exit_sprite)
+            self.exit_list.draw()
         
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:
@@ -181,7 +196,9 @@ class MyGame(arcade.Window):
 
         chest_hit = arcade.check_for_collision_with_list(self.player_sprite, self.treasure_list)
         if len(chest_hit) == 1:
+            self.hit = True
             chest_hit[0].remove_from_sprite_lists()
+            
         
         coin_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.coin_list)
         if len(coin_hit_list) > 0:
