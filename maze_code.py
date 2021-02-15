@@ -15,6 +15,7 @@ player_speed = 3
 
 empty_tile = 0
 crate_tile = 1
+chest_tile = 2
 
 maze_height = 31
 maze_width = 31
@@ -33,6 +34,8 @@ def _creating_the_grid(width, height):
                 grid[row].append(crate_tile)
             else:
                 grid[row].append(crate_tile)
+    r = random.randrange(height-1)
+    grid[r][width-1] = chest_tile
     return grid
 
 def make_maze_depth_first(maze_width, maze_height):
@@ -69,6 +72,7 @@ class MyGame(arcade.Window):
 
         self.player_list = None
         self.wall_list = None
+        self.treasure_list = None
 
         self.score = 0
         self.player_sprite = None
@@ -82,6 +86,7 @@ class MyGame(arcade.Window):
 
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.treasure_list = arcade.SpriteList()
 
         self.score = 0
 
@@ -94,6 +99,11 @@ class MyGame(arcade.Window):
                     wall.center_x = column * sprite_size + sprite_size / 2
                     wall.center_y = row * sprite_size + sprite_size / 2
                     self.wall_list.append(wall)
+                elif maze[row][column] == 2:
+                    chest = arcade.Sprite("Maze-Game/images/open_treasure_chest.PNG", sprite_scale)
+                    chest.center_x = column * sprite_size + sprite_size / 2
+                    chest.center_y = row * sprite_size + sprite_size / 2
+                    self.treasure_list.append(chest)
 
         self.player_sprite = arcade.Sprite(self.player_sprite_image, sprite_scale)
         self.player_list.append(self.player_sprite)
@@ -103,8 +113,8 @@ class MyGame(arcade.Window):
 
             w = maze_width * sprite_size
             h = maze_height * sprite_size
-            self.player_sprite.center_x = w
-            self.player_sprite.center_y = h
+            self.player_sprite.center_x = random.randrange(w)
+            self.player_sprite.center_y = random.randrange(h)
 
             walls_hit = arcade.check_for_collision_with_list(self.player_sprite, self.wall_list)
             if len(walls_hit) == 0:
