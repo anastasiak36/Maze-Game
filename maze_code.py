@@ -20,9 +20,7 @@ chest_tile = 2
 maze_height = 31
 maze_width = 31
 
-r = random.randrange(maze_height-1)
-while r % 2 == 1 or r == maze_height - 1 or r == 0:
-    r = random.randrange(maze_height-1)
+r = 15
 
 viewport_margin = 300
 
@@ -77,11 +75,14 @@ class MyGame(arcade.Window):
         self.player_list = None
         self.wall_list = None
         self.treasure_list = None
+        self.coin_list = None
 
         self.score = 0
         self.player_sprite = None
 
         self.physics_engine = None
+
+        self.coin_count = 0
 
         self.view_bottom = 0
         self.view_left = 0
@@ -91,6 +92,7 @@ class MyGame(arcade.Window):
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
         self.treasure_list = arcade.SpriteList()
+        self.coin_list = arcade.SpriteList()
 
         self.score = 0
 
@@ -103,6 +105,18 @@ class MyGame(arcade.Window):
                     wall.center_x = column * sprite_size + sprite_size / 2
                     wall.center_y = row * sprite_size + sprite_size / 2
                     self.wall_list.append(wall)
+        
+    
+        count = 0
+        while count < 30:
+            row = random.randrange(1, 30)
+            column = random.randrange(1,30)
+            if maze[row][column] == 0:
+                coin = arcade.Sprite("Maze-Game/images/coin.gif", sprite_scale)
+                coin.center_x = column * sprite_size + sprite_size / 2
+                coin.center_y = row * sprite_size + sprite_size / 2
+                self.coin_list.append(coin)
+                count += 1
 
         chest = arcade.Sprite("Maze-Game/images/open_treasure_chest.PNG", sprite_scale)
         chest.center_x = 30 * sprite_size + sprite_size / 2
@@ -137,11 +151,10 @@ class MyGame(arcade.Window):
         self.wall_list.draw()
         self.player_list.draw()
         self.treasure_list.draw()
+        self.coin_list.draw()
 
-        #sprite_count = len(self.wall_list)
-
-        #output = f"Sprite Count: {sprite_count}"
-        #arcade.draw_text(output, self.view_left + 20, screen_height - 20 + self.view_bottom, arcade.color.DARK_BLUE, 16)
+        output = f"Coins Collected: {self.coin_count}"
+        arcade.draw_text(output, self.view_left + 840, screen_height - 20 + self.view_bottom, arcade.color.DARK_BLUE, 16)
         
     def on_key_press(self, key, modifiers):
         if key == arcade.key.UP:
@@ -169,6 +182,12 @@ class MyGame(arcade.Window):
         chest_hit = arcade.check_for_collision_with_list(self.player_sprite, self.treasure_list)
         if len(chest_hit) == 1:
             chest_hit[0].remove_from_sprite_lists()
+        
+        coin_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.coin_list)
+        if len(coin_hit_list) > 0:
+            for coin in coin_hit_list:
+                coin.remove_from_sprite_lists()
+                self.coin_count += 1
 
         changed = False
 
