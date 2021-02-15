@@ -166,6 +166,10 @@ class MyGame(arcade.Window):
 
         self.physics_engine.update()
 
+        chest_hit = arcade.check_for_collision_with_list(self.player_sprite, self.treasure_list)
+        if len(chest_hit) == 1:
+            chest_hit[0].remove_from_sprite_lists()
+
         changed = False
 
         left_bndry = self.view_left + viewport_margin
