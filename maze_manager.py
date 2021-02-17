@@ -9,6 +9,7 @@ class Maze_Manager(object):
         self.current_screen = None
         self.image_list = None
         self.player = None
+        self.window = None
 
     def setup_character_selection(self):
         self.root.title("Select Your Character!")
@@ -23,9 +24,12 @@ class Maze_Manager(object):
         self.setup_maze(selected_char_image)
     
     def setup_maze(self, selected_char_image):
-        window = MyGame(selected_char_image)
-        window.setup()
+        self.window = MyGame(selected_char_image, callback_on_exit = self.screen_destroy)
+        self.window.setup()
         arcade.run()
+    
+    def screen_destroy(self):
+        self.window.destroy()
 
 def main():
     maze = Maze_Manager()

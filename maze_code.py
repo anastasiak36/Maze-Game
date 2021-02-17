@@ -67,7 +67,7 @@ def make_maze_depth_first(maze_width, maze_height):
     return maze
 class MyGame(arcade.Window):
 
-    def __init__(self, sprite):
+    def __init__(self, sprite, callback_on_exit):
         
         super().__init__(screen_width, screen_height, screen_title)
         # create the list to keep the character in
@@ -164,10 +164,10 @@ class MyGame(arcade.Window):
 
         if self.hit == True:
             output_exit = f"Congratulations! You made it! \n Please proceed to the exit!"
-            arcade.draw_text(output_exit, self.view_left + 600, screen_height - 200 + self.view_bottom, arcade.color.DARK_BLUE, 24)
+            arcade.draw_text(output_exit, 1250, 600 , arcade.color.DARK_BLUE, 24)
             exit_sprite = arcade.Sprite("Maze-Game/images/Exit_sign.jpg", sprite_scale)
             exit_sprite.center_x = 1500
-            exit_sprite.center_y = 300
+            exit_sprite.center_y = 400 
             self.exit_list.append(exit_sprite)
             self.exit_list.draw()
         
@@ -206,6 +206,10 @@ class MyGame(arcade.Window):
                 coin.remove_from_sprite_lists()
                 self.coin_count += 1
 
+        exit_hit = arcade.check_for_collision_with_list(self.player_sprite, self.exit_list)
+        if len(exit_hit) == 1:
+            self.exit_game()
+
         changed = False
 
         left_bndry = self.view_left + viewport_margin
@@ -230,6 +234,9 @@ class MyGame(arcade.Window):
 
         if changed:
             arcade.set_viewport(self.view_left, screen_width + self.view_left, self.view_bottom, screen_height + self.view_bottom)
+
+    def exit_game(self):
+        self.callback_on_exit()
 
 
     
