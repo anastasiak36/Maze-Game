@@ -3,6 +3,7 @@
 import random 
 import arcade
 
+
 local_sprite = 128
 sprite_scale = 0.25
 sprite_size = local_sprite * sprite_scale

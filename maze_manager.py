@@ -2,6 +2,7 @@ import tkinter as tk
 import arcade
 from character_selection import Character_Selection, ImageList, Image_object
 from maze_code import MyGame
+import sys
 
 class Maze_Manager(object):
     def __init__(self):
@@ -29,7 +30,7 @@ class Maze_Manager(object):
         arcade.run()
     
     def screen_destroy(self):
-        arcade.Window.destroy()
+        sys.exit()
 
 def main():
     maze = Maze_Manager()
