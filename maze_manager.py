@@ -29,7 +29,7 @@ class Maze_Manager(object):
         arcade.run()
     
     def screen_destroy(self):
-        self.window.destroy()
+        arcade.Window.destroy()
 
 def main():
     maze = Maze_Manager()

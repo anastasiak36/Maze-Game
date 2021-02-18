@@ -90,6 +90,8 @@ class MyGame(arcade.Window):
         self.view_bottom = 0
         self.view_left = 0
 
+        self.callback_on_exit = callback_on_exit
+
     def setup(self):
 
         self.player_list = arcade.SpriteList()
@@ -165,7 +167,7 @@ class MyGame(arcade.Window):
         if self.hit == True:
             output_exit = f"Congratulations! You made it! \n Please proceed to the exit!"
             arcade.draw_text(output_exit, 1250, 600 , arcade.color.DARK_BLUE, 24)
-            exit_sprite = arcade.Sprite("Maze-Game/images/Exit_sign.jpg", sprite_scale)
+            exit_sprite = arcade.Sprite("Maze-Game/images/Exit_sign.png", sprite_scale)
             exit_sprite.center_x = 1500
             exit_sprite.center_y = 400 
             self.exit_list.append(exit_sprite)
@@ -207,7 +209,7 @@ class MyGame(arcade.Window):
                 self.coin_count += 1
 
         exit_hit = arcade.check_for_collision_with_list(self.player_sprite, self.exit_list)
-        if len(exit_hit) == 1:
+        if len(exit_hit) >= 1:
             self.exit_game()
 
         changed = False
