@@ -24,8 +24,12 @@ class Character_Selection(tk.Frame):
         self.create_widgets()
     
     def create_widgets(self):
-        row = 2
-        image_row = 1
+        tk.Label(self, text = "Welcome to the maze game! Please Select a Character from the options below. Then, click the button at the bottom of the screen to start the game. \n Move around the maze while collecting coins to reach the treasure box at the end.",
+        font = 'ComicSansMS 16', fg = 'Purple'
+        ).grid(row = 0, column = 0, sticky = tk.NSEW, columnspan = 3)
+        
+        row = 3
+        image_row = 2
         column = 0
         self.image_file = tk.StringVar()
         self.image_file.set(None)
@@ -41,10 +45,10 @@ class Character_Selection(tk.Frame):
                          )
             
             w.photo = imageSmall 
-            w.grid (row = image_row, column = column)
+            w.grid (row = image_row, column = column, sticky = tk.W)
 
             column += 1
-            if column == 4:
+            if column == 3:
                 row += 2
                 image_row += 2
                 column = 0
