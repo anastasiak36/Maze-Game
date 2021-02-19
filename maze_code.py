@@ -77,6 +77,9 @@ class MyGame(arcade.Window):
         self.player_list = None
         self.wall_list = None
         self.treasure_list = None
+
+        self.treasure_sound = arcade.load_sound("Maze-Game/images/coin1.wav")
+
         self.coin_list = None
         self.exit_list = None
 
@@ -87,6 +90,8 @@ class MyGame(arcade.Window):
 
         self.coin_count = 0
         self.hit = False
+
+        self.coin_sound = arcade.load_sound("Maze-Game/images/coin5.wav")
 
         self.view_bottom = 0
         self.view_left = 0
@@ -200,12 +205,14 @@ class MyGame(arcade.Window):
         chest_hit = arcade.check_for_collision_with_list(self.player_sprite, self.treasure_list)
         if len(chest_hit) == 1:
             self.hit = True
+            arcade.play_sound(self.treasure_sound)
             chest_hit[0].remove_from_sprite_lists()
             
         
         coin_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.coin_list)
         if len(coin_hit_list) > 0:
             for coin in coin_hit_list:
+                arcade.play_sound(self.coin_sound)
                 coin.remove_from_sprite_lists()
                 self.coin_count += 1
 
