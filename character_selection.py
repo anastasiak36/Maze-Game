@@ -24,9 +24,9 @@ class Character_Selection(tk.Frame):
         self.create_widgets()
     
     def create_widgets(self):
-        tk.Label(self, text = "Welcome to the maze game! Please Select a Character from the options below. Then, click the button at the bottom of the screen to start the game. \n Move around the maze while collecting coins to reach the treasure box at the end.",
+        tk.Label(self, text = "Welcome to the maze game! Please Select a Character from the options below. Then, click the button at the bottom of the screen to start the game. \n Move around the maze while collecting coins to reach the treasure box at the end. Try to collect all the coins!",
         font = 'ComicSansMS 16', fg = 'Purple'
-        ).grid(row = 0, column = 0, sticky = tk.NSEW, columnspan = 3)
+        ).grid(row = 0, column = 0, sticky = tk.NSEW, columnspan = 8)
         
         row = 3
         image_row = 2
@@ -48,14 +48,22 @@ class Character_Selection(tk.Frame):
             w.grid (row = image_row, column = column, sticky = tk.W)
 
             column += 1
-            if column == 3:
+            if column == 4:
                 row += 2
                 image_row += 2
                 column = 0
+        # 
+        imageSmall = tk.PhotoImage(file = "Maze-Game/images/maze_snip.PNG")
+        w= tk.Label (self,
+                        image = imageSmall, 
+                         )
+            
+        w.photo = imageSmall 
+        w.grid (row = 2, column = 5, columnspan = 3, rowspan = 5, sticky = tk.NSEW)
         
         # create the button
         tk.Button(self, text = "Start Game!", font = "ComicSansMS 13", command = self.selected_clicked
-        ).grid(row = 6, column = 3, sticky = tk.E)
+        ).grid(row = 7, column = 8, sticky = tk.E)
         
 
     def selected_clicked(self):
