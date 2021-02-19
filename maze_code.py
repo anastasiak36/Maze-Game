@@ -153,7 +153,7 @@ class MyGame(arcade.Window):
 
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
-            arcade.set_background_color(arcade.csscolor.MINT_CREAM)
+            arcade.set_background_color(arcade.csscolor.HONEYDEW)
             self.view_left = 0
             self.view_bottom = 0
             print(f"Total number of wall blocks: {len(self.wall_list)}")
