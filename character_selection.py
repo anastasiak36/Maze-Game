@@ -25,7 +25,7 @@ class Character_Selection(tk.Frame):
     
     def create_widgets(self):
         tk.Label(self, text = "Welcome to the maze game! Please Select a Character from the options below. Then, click the button at the bottom of the screen to start the game. \n Move around the maze, using the arrow keys on your keyboard, while collecting coins to reach the treasure box at the end. Try to collect all the coins!",
-        font = 'ComicSansMS 16', fg = 'Purple'
+        font = 'ComicSansMS 16', fg = 'Brown4'
         ).grid(row = 0, column = 0, sticky = tk.NSEW, columnspan = 8)
         
         row = 3
@@ -36,7 +36,7 @@ class Character_Selection(tk.Frame):
 
         for i in self.images_list.image_list:
             
-            tk.Radiobutton(self, text= i.name, font = 'ComicSansMS 14', fg = 'Purple', variable = self.image_file, value = i.file
+            tk.Radiobutton(self, text= i.name, font = 'ComicSansMS 14', fg = 'Brown4', variable = self.image_file, value = i.file
             ).grid(row = row, column = column, sticky = tk.W)
 
             imageSmall = tk.PhotoImage(file = i.file)
@@ -62,7 +62,7 @@ class Character_Selection(tk.Frame):
         w.grid (row = 2, column = 5, columnspan = 3, rowspan = 5, sticky = tk.NSEW)
         
         # create the button
-        tk.Button(self, text = "Start Game!", font = "ComicSansMS 13", command = self.selected_clicked
+        tk.Button(self, text = "Start Game!", font = "ComicSansMS 13 bold", fg = 'White', bg = 'Brown4', command = self.selected_clicked
         ).grid(row = 7, column = 8, sticky = tk.E)
         
 
