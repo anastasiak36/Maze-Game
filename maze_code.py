@@ -153,7 +153,7 @@ class MyGame(arcade.Window):
 
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
-            arcade.set_background_color(arcade.csscolor.HONEYDEW)
+            arcade.set_background_color(arcade.color.AERO_BLUE)
             self.view_left = 0
             self.view_bottom = 0
             print(f"Total number of wall blocks: {len(self.wall_list)}")
@@ -168,7 +168,7 @@ class MyGame(arcade.Window):
         
 
         output = f"Coins Collected: {self.coin_count}"
-        arcade.draw_text(output, self.view_left + 840, screen_height - 20 + self.view_bottom, arcade.color.DARK_BLUE, 16)
+        arcade.draw_text(output, self.view_left + 840, screen_height - 20 + self.view_bottom, arcade.color.ORANGE_PEEL, 16)
 
         if self.hit == True:
             output_exit = f"Congratulations! You made it! \n Please proceed to the exit!"
