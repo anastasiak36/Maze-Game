@@ -172,7 +172,7 @@ class MyGame(arcade.Window):
 
         if self.hit == True:
             output_exit = f"Congratulations! You made it! \n Please proceed to the exit!"
-            arcade.draw_text(output_exit, 1250, 600 , arcade.color.DARK_BLUE, 24)
+            arcade.draw_text(output_exit, 1150, 600 , arcade.color.DARK_BLUE, 24)
             exit_sprite = arcade.Sprite("Maze-Game/images/Exit_sign.png", sprite_scale)
             exit_sprite.center_x = 1500
             exit_sprite.center_y = 400 
