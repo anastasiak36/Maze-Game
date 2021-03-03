@@ -26,7 +26,7 @@ class Character_Selection(tk.Frame):
     
     def create_widgets(self):
         tk.Label(self, text = "Welcome to the maze game! Please Select a Character from the options below. Then, click the button at the bottom of the screen to start the game. \n Move around the maze, using the arrow keys on your keyboard, while collecting coins to reach the treasure box at the end. Try to collect all the coins!",
-        font = 'Georgia 16', fg = 'Purple3'
+        font = 'Georgia 14', fg = 'Purple3'
         ).grid(row = 0, column = 0, sticky = tk.NSEW, columnspan = 8)
         
         row = 3
