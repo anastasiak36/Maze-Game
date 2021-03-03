@@ -37,7 +37,7 @@ class Character_Selection(tk.Frame):
 
         for i in self.images_list.image_list:
             
-            tk.Radiobutton(self, text= i.name, font = 'Georgia 14', fg = 'Purple3', variable = self.image_file, value = i.file
+            tk.Radiobutton(self, text= i.name, font = 'Georgia 12', fg = 'Purple3', variable = self.image_file, value = i.file
             ).grid(row = row, column = column, sticky = tk.W)
 
             imageSmall = tk.PhotoImage(file = i.file)
@@ -63,8 +63,8 @@ class Character_Selection(tk.Frame):
         w.grid (row = 2, column = 5, columnspan = 3, rowspan = 5, sticky = tk.NSEW)
         
         # create the button
-        tk.Button(self, text = "Start Game!", font = "Georgia 13 bold", fg = 'White', bg = 'Brown4', command = self.selected_clicked
-        ).grid(row = 7, column = 8, sticky = tk.E)
+        tk.Button(self, text = "Start Game!", font = "Georgia 12 bold", fg = 'White', bg = 'Brown4', command = self.selected_clicked
+        ).grid(row = 7, column = 7, sticky = tk.E)
         
 
     def selected_clicked(self):
