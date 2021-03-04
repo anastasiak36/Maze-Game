@@ -78,7 +78,7 @@ class MyGame(arcade.Window):
         self.wall_list = None
         self.treasure_list = None
 
-        self.treasure_sound = arcade.load_sound("Maze-Game/images/coin1.wav")
+        self.treasure_sound = arcade.load_sound("images/coin1.wav")
 
         self.coin_list = None
         self.exit_list = None
@@ -91,7 +91,7 @@ class MyGame(arcade.Window):
         self.coin_count = 0
         self.hit = False
 
-        self.coin_sound = arcade.load_sound("Maze-Game/images/coin5.wav")
+        self.coin_sound = arcade.load_sound("images/coin5.wav")
 
         self.view_bottom = 0
         self.view_left = 0
@@ -113,7 +113,7 @@ class MyGame(arcade.Window):
         for row in range(maze_height):
             for column in range(maze_width):
                 if maze[row][column] == 1:
-                    wall = arcade.Sprite("Maze-Game/images/brick_wall.PNG", sprite_scale) 
+                    wall = arcade.Sprite("images/brick_wall.PNG", sprite_scale) 
                     wall.center_x = column * sprite_size + sprite_size / 2
                     wall.center_y = row * sprite_size + sprite_size / 2
                     self.wall_list.append(wall)
@@ -124,13 +124,13 @@ class MyGame(arcade.Window):
             row = random.randrange(1, 30)
             column = random.randrange(1,30)
             if maze[row][column] == 0:
-                coin = arcade.Sprite("Maze-Game/images/coin.gif", sprite_scale)
+                coin = arcade.Sprite("images/coin.gif", sprite_scale)
                 coin.center_x = column * sprite_size + sprite_size / 2
                 coin.center_y = row * sprite_size + sprite_size / 2
                 self.coin_list.append(coin)
                 count += 1
 
-        chest = arcade.Sprite("Maze-Game/images/open_treasure_chest.PNG", sprite_scale)
+        chest = arcade.Sprite("images/open_treasure_chest.PNG", sprite_scale)
         chest.center_x = 30 * sprite_size + sprite_size / 2
         chest.center_y = r * sprite_size + sprite_size / 2
         self.treasure_list.append(chest)
@@ -173,7 +173,7 @@ class MyGame(arcade.Window):
         if self.hit == True:
             output_exit = f"Congratulations! You made it! \n Please proceed to the exit!"
             arcade.draw_text(output_exit, 1150, 600 , arcade.color.DARK_BLUE, 24)
-            exit_sprite = arcade.Sprite("Maze-Game/images/Exit_sign.png", sprite_scale)
+            exit_sprite = arcade.Sprite("images/Exit_sign.png", sprite_scale)
             exit_sprite.center_x = 1500
             exit_sprite.center_y = 400 
             self.exit_list.append(exit_sprite)

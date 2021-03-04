@@ -54,7 +54,7 @@ class Character_Selection(tk.Frame):
                 image_row += 2
                 column = 0
         # 
-        imageSmall = tk.PhotoImage(file = "Maze-Game/images/maze_snip.PNG")
+        imageSmall = tk.PhotoImage(file = "images/maze_snip.PNG")
         w= tk.Label (self,
                         image = imageSmall, 
                          )

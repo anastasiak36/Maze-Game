@@ -14,7 +14,7 @@ class Maze_Manager(object):
 
     def setup_character_selection(self):
         self.root.title("Select Your Character!")
-        self.image_list = ImageList("Maze-Game/image_adress.txt")
+        self.image_list = ImageList("image_adress.txt")
         self.current_screen = Character_Selection(
                                                 master = self.root, 
                                                 image_list= self.image_list, 
